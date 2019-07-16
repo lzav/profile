@@ -30,3 +30,8 @@ body {
         font-size: 2rem;
     }
 }
+
+.clouds {
+    background-image: url('./clouds-sea.jpg');
+    /* background-size: cover; */
+}

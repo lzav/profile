@@ -1,6 +1,6 @@
 node_modules
 ignore
-*.jpg
+
 *.zip
 /backup
 /fontawesome-free-5.9.0-web

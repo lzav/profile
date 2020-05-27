@@ -1,8 +1,7 @@
 node_modules
 ignore
-
+/config/keys.js
 *.zip
 /backup
-/fontawesome-free-5.9.0-web
 test.html
 practice.js

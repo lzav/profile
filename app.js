@@ -2,6 +2,12 @@ const express = require('express');
 const app = express();
 const PORT = 3000;
 const mongoose = require('mongoose');
+const passport = require('passport');
+const passportConfig = require('./config/passport-config');
+const keys = require('./config/keys');
+const expressSession = require('express-session');
+const authRoutes = require('./routes/auth-routes');
+
 
 mongoose.connect('mongodb://localhost:27017/blog', {useNewUrlParser: true, useUnifiedTopology: true})
     .catch(err => console.log(err));
@@ -11,22 +17,29 @@ mongoose.connection
     .on('error', err => console.log(err));
 
 
-const userSchema = new mongoose.Schema({
-    username: String
-});
+app.set('view engine', 'ejs');
+app.use(express.static('public'));
 
-const User = new mongoose.model('user', userSchema);
+// Cookies
+app.use(expressSession({
+    secret: keys.expressSession.secret,
+    saveUninitialized: true,
+    resave: false,
+    maxAge: 24*60*60*1000
+}));
 
-// User.deleteMany({})
-//     .then(result => console.log(result))
-//     .catch(err => console.log(err));
+// Initialize PassportJS and call session strategy
+app.use(passport.initialize());
+app.use(passport.session());
 
-// User.create({username: 'Test'})
-//     .then(savedUser => console.log(savedUser))
-//     .catch(err => console.log(err));
+
+// ROUTES
+
+app.use('/auth', authRoutes);
 
 app.get('/', (req, res) => {
-    res.send('Home Route');
+    console.log('Is the user authenticated? ' + req.isAuthenticated());
+    res.render('index');
 });
 
 

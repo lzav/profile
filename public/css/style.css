@@ -1,7 +1,7 @@
 body {
     background: #788fa1;
     font-family: Montserrat;
-    background-image: url('./clouds-sea.jpg');
+    background-image: url('/images/clouds-sea.jpg');
     background-size: cover;
     background-repeat: no-repeat;
 }

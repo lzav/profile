@@ -14,7 +14,7 @@ router.get('/logout', (req, res) => {
 });
 
 router.get('/google',
-  passport.authenticate('google', { scope: ['profile'] })
+  passport.authenticate('google', { scope: ['profile'], prompt: 'select_account' })
 );
 
 router.get('/google/callback', 

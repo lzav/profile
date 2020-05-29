@@ -1,8 +1,10 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20');
 const FacebookStrategy = require('passport-facebook');
+const LocalStrategy= require('passport-local');
 const User = require('../models/user');
 const keys = require('../config/keys');
+const bcrypt = require('bcrypt');
 
 
 // PASSPORT SETUP
@@ -76,6 +78,44 @@ passport.use(new FacebookStrategy({
 ));
 // EOF FACEBOOK
 
+
+// LOCAL STRATEGY
+passport.use(new LocalStrategy({
+    usernameField: 'email',
+    passwordField: 'password'
+},    
+
+    (username, password, done) => {
+        
+        User.findOne({email: username})
+            .then(foundUser => {
+                // User not found: redirect to login
+                if (!foundUser) {                
+                    console.log('User not found');    
+                    return done(null, false);
+                } 
+               
+                // user found: check password
+                bcrypt.compare(password, foundUser.password)
+                    .then(result => {
+                        if(!result) {
+                            // PASSWORDS DO NOT MATCH
+                            // console.log("Passwords do not match");
+                            return done(null, false);
+                        }
+                        // PASSWORDS MATCH
+                        // console.log('User found and passwords match');
+                        return done(null, foundUser);
+                    })
+            })
+            .catch(err => {
+                // flash message something went wrong. Please try again later
+                console.log(err);
+                res.redirect('/auth/login');
+            });
+    }
+  ));
+// EOF LOCAL STRATEGY
 
 passport.serializeUser((user, done) => {
     done(null, user.id);

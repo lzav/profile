@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const PORT = 3000;
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 const passport = require('passport');
 const passportConfig = require('./config/passport-config');
 const keys = require('./config/keys');
@@ -26,6 +27,10 @@ app.use(expressSession({
     saveUninitialized: true,
     resave: false,
     maxAge: 24*60*60*1000
+}));
+
+app.use(bodyParser.urlencoded({
+    extended: true
 }));
 
 // Initialize PassportJS and call session strategy

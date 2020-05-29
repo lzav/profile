@@ -13,6 +13,7 @@ router.get('/logout', (req, res) => {
     res.redirect('/');
 });
 
+// GOOGLE
 router.get('/google',
   passport.authenticate('google', { scope: ['profile'], prompt: 'select_account' })
 );
@@ -25,5 +26,24 @@ router.get('/google/callback',
     res.redirect('/');
   }
 );
+// EOF GOOGLE
+
+
+// FACEBOOK
+router.get('/facebook',
+  passport.authenticate('facebook')
+);
+
+router.get('/facebook/callback', 
+  passport.authenticate('facebook', { failureRedirect: '/login' }),
+
+  function(req, res) {
+    // Successful authentication, redirect home.
+
+    console.log('Logged in with facebook');
+    res.redirect('/');
+  }
+);
+// EOF FACEBOOK
 
 module.exports = router;

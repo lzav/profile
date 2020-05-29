@@ -1,11 +1,13 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20');
+const FacebookStrategy = require('passport-facebook');
 const User = require('../models/user');
 const keys = require('../config/keys');
 
 
 // PASSPORT SETUP
 
+// GOOGLE
 passport.use(new GoogleStrategy({
     clientID: keys.passport.google.clientID,
     clientSecret: keys.passport.google.clientSecret,
@@ -35,9 +37,44 @@ passport.use(new GoogleStrategy({
         .catch(err => {
             console.log(err);
             res.redirect('/');
-        })
+        });
   }
 ));
+// EOF GOOGLE
+
+
+// FACEBOOK
+passport.use(new FacebookStrategy({
+    clientID: keys.passport.facebook.clientID,
+    clientSecret: keys.passport.facebook.clientSecret,
+    callbackURL: "http://localhost:3000/auth/facebook/callback"
+  },
+  function(accessToken, refreshToken, profile, done) {    
+    
+    User.findOne({facebookID: profile.id})
+        .then(foundUser => {
+            // User found
+            if (foundUser) {
+                done(null, foundUser);
+            } else {            
+            // User not found: add to db
+                User.create({
+                    username: profile.displayName,
+                    googleID: profile.id
+                })
+                    .then(savedUser => {
+                        console.log('New user saved to db: ' + savedUser);
+                        done(null, savedUser);
+                    })
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            res.redirect('/login');
+        });
+  }
+));
+// EOF FACEBOOK
 
 
 passport.serializeUser((user, done) => {

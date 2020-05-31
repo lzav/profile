@@ -82,20 +82,27 @@ passport.use(new FacebookStrategy({
 // LOCAL STRATEGY
 passport.use(new LocalStrategy({
     usernameField: 'email',
-    passwordField: 'password'
+    passwordField: 'password',    
 },    
 
     (username, password, done) => {
         
         User.findOne({email: username})
             .then(foundUser => {
+                
                 // User not found: redirect to login
                 if (!foundUser) {                
                     console.log('User not found');    
                     return done(null, false);
                 } 
+
+                // Check confirmed registration through email
+                if (foundUser.confirmed === false) {
+                    console.log('User has not confirmed registration');
+                    return done(null, false);
+                }
                
-                // user found: check password
+                // User found: check password
                 bcrypt.compare(password, foundUser.password)
                     .then(result => {
                         if(!result) {

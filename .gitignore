@@ -1,6 +1,6 @@
 node_modules
 ignore
-# /config/keys.js
+/config/keys.js
 *.zip
 /backup
 test.html

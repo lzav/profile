@@ -3,11 +3,13 @@ const app = express();
 const PORT = 3000;
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
 const passport = require('passport');
 const passportConfig = require('./config/passport-config');
 const keys = require('./config/keys');
 const expressSession = require('express-session');
 const authRoutes = require('./routes/auth-routes');
+const blogRoutes = require('./routes/blog-routes');
 
 
 mongoose.connect('mongodb://localhost:27017/blog', {useNewUrlParser: true, useUnifiedTopology: true})
@@ -29,6 +31,8 @@ app.use(expressSession({
     maxAge: 24*60*60*1000
 }));
 
+app.use(methodOverride('_method'));
+
 app.use(bodyParser.urlencoded({
     extended: true
 }));
@@ -41,6 +45,7 @@ app.use(passport.session());
 // ROUTES
 
 app.use('/auth', authRoutes);
+app.use('/blogs', blogRoutes);
 
 app.get('/', (req, res) => {
     console.log('Is the user authenticated? ' + req.isAuthenticated());

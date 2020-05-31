@@ -122,7 +122,7 @@ router.get('/confirm/:user_id/:rString', (req, res) => {
         // Update confirmed to true and set rString to null
         foundUser.updateOne({$set:{confirmed: true, rString: null}})
           .then(result => {            
-            console.log('Updated user confirmed: ' + result);
+            // console.log('Updated user confirmed: ' + result);
             res.redirect('/auth/login');
           });        
 

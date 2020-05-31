@@ -1,0 +1,25 @@
+<%- include('../partials/header') %>
+
+<div class="jumbotron">
+    <div class="container">
+        <h1>Edit <%= blog.title %></h1>
+
+        <form action="/blogs/<%= blog._id %>?_method=PATCH" method="POST" class="mt-2">
+
+            <div class="form-group">
+              <label for="title">Blog Title</label>
+              <input type="text" name="title" id="title" class="form-control" value="<%= blog.title %>">
+            </div>
+
+            <div class="form-group">
+              <label for="text">Blog Content</label>
+              <textarea class="form-control" name="text" id="text" rows="5"><%= blog.text %></textarea>
+            </div>    
+
+            <button class="btn btn-lg btn-info">Update</button>
+            
+          </form>
+    </div>
+</div>
+
+<%- include('../partials/footer') %>

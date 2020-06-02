@@ -68,6 +68,7 @@ router.post('/register', (req, res) => {
   bcrypt.hash(req.body.password, 10)
     .then(hash => {
         User.create({
+          displayName: req.body.displayName,
           email: req.body.email,
           password: hash,
           // set to false until confirmed reg through email

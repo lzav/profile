@@ -27,17 +27,16 @@ Router.post('/', isLoggedIn, (req, res) => {
 
     const author = {
         id: req.user._id,
-        username: req.user.username
+        displayName: req.user.displayName
     }
 
-    console.log(author);
+    // console.log(`Author is ${author}`);
+    // console.log(`User is ${req.user}`);
            
     Blog.create({
         title: req.body.title,
         text: req.body.text,
-        // author.username: req.user.username,
-        // author.id: req.user._id
-
+        author: author
     })
         .then(savedBlog => {
             console.log('Blog saved: ' + savedBlog);
@@ -51,8 +50,7 @@ Router.post('/', isLoggedIn, (req, res) => {
 })
 
 Router.get('/:id', (req, res) => {
-    console.log(req.params.id);
-
+    
     Blog.findById(req.params.id)
         .then(foundBlog => {
             res.render('./blogs/show', {blog: foundBlog});

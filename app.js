@@ -10,6 +10,7 @@ const keys = require('./config/keys');
 const expressSession = require('express-session');
 const authRoutes = require('./routes/auth-routes');
 const blogRoutes = require('./routes/blog-routes');
+const commentRoutes = require('./routes/comment-routes');
 
 
 mongoose.connect('mongodb://localhost:27017/blog', {useNewUrlParser: true, useUnifiedTopology: true})
@@ -45,7 +46,9 @@ app.use(passport.session());
 // ROUTES
 
 app.use('/auth', authRoutes);
+app.use('/blogs/comments', commentRoutes);
 app.use('/blogs', blogRoutes);
+
 
 app.get('/', (req, res) => {
     console.log('Is the user authenticated? ' + req.isAuthenticated());

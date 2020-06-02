@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
-    username: String,
+    displayName: String,
     email: String,
     googleID: String,
     facebookID: String,
@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema({
     rString: String
 });
 
-const User = new mongoose.model('user', userSchema);
+const User = new mongoose.model('User', userSchema);
 
 // User.deleteMany({})
 //     .then(result => console.log(result))

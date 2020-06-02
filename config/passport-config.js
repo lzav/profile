@@ -26,7 +26,7 @@ passport.use(new GoogleStrategy({
             } else {            
             // User not found: add to db
                 User.create({
-                    username: profile.displayName,
+                    displayName: profile.displayName,
                     googleID: profile.id
                 })
                     .then(savedUser => {
@@ -61,7 +61,7 @@ passport.use(new FacebookStrategy({
             } else {            
             // User not found: add to db
                 User.create({
-                    username: profile.displayName,
+                    displayName: profile.displayName,
                     googleID: profile.id
                 })
                     .then(savedUser => {

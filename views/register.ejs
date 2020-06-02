@@ -15,13 +15,18 @@
           <form action="/auth/register" method="POST" class="mt-2">
 
             <div class="form-group">
+              <label for="displayName">Name (this will appear on your posts)</label>
+              <input type="text" name="displayName" id="displayName" class="form-control">
+            </div>
+
+            <div class="form-group">
               <label for="login">Email</label>
-              <input type="text" name="email" id="login" placeholder="Email" class="form-control">
+              <input type="text" name="email" id="login" class="form-control">
             </div>
 
             <div class="form-group">
               <label for="psw">Password</label>
-              <input type="password" name="password" id="password" placeholder="Password" class="form-control">
+              <input type="password" name="password" id="password" class="form-control">
             </div>    
 
             <button class="btn btn-lg btn-info">Submit</button>

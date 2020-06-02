@@ -7,19 +7,19 @@ const BlogSchema = new mongoose.Schema({
     author: {
         id: { 
             type: mongoose.Schema.Types.ObjectId,
-            ref: "user"
+            ref: "User"
         },
         username: String
     },
     comments: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'comment'
+            ref: 'Comment'
         }
     ]
 });
 
-const Blog = new mongoose.model('blog', BlogSchema);
+const Blog = new mongoose.model('Blog', BlogSchema);
 
 // Blog.deleteMany({})
 //     .then(result => console.log(result))

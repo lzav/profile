@@ -18,24 +18,36 @@ Router.get('/', (req, res) => {
 });
 
 
-Router.get('/new', (req, res) => {
+Router.get('/new', isLoggedIn, (req, res) => {
     res.render('./blogs/new');
 });
 
 
-Router.post('/', (req, res) => {
+Router.post('/', isLoggedIn, (req, res) => {
+
+    const author = {
+        id: req.user._id,
+        username: req.user.username
+    }
+
+    console.log(author);
            
     Blog.create({
         title: req.body.title,
-        text: req.body.text
+        text: req.body.text,
+        // author.username: req.user.username,
+        // author.id: req.user._id
+
     })
         .then(savedBlog => {
             console.log('Blog saved: ' + savedBlog);
+            res.redirect('/blogs');
         })
-        .catch(err => console.log('Something went wrong saving the blog: '+ err));
-
-
-    res.redirect('/blogs');
+        .catch(err => {
+            console.log('Something went wrong saving the blog: '+ err);
+            res.redirect('/blogs');
+        });
+    
 })
 
 Router.get('/:id', (req, res) => {
@@ -87,6 +99,16 @@ Router.delete('/:id', (req, res) => {
         .catch(err => console.log(err));
 });
 
+
+function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated()) {
+        // User logged in
+        next();
+    } else {
+        // User NOT logged in
+        res.redirect('/auth/login');
+    }
+}
 
 
 module.exports = Router;

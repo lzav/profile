@@ -4,6 +4,8 @@
     <div class="container">
         <h1>Blogs</h1>
 
+        <a href="/blogs/new">Create a new blog</a>
+
         <% for (let blog of blogs) { %>
             <h4><a href="/blogs/<%= blog._id %>"><%= blog.title %></a></h4>
             <p><%= blog.text %></p>

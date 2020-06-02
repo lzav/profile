@@ -53,6 +53,7 @@ Router.get('/:id', (req, res) => {
     
     Blog.findById(req.params.id)
         .then(foundBlog => {
+            
             res.render('./blogs/show', {blog: foundBlog});
         })
         .catch(err => {

@@ -46,8 +46,8 @@ app.use(passport.session());
 // ROUTES
 
 app.use('/auth', authRoutes);
-app.use('/blogs/comments', commentRoutes);
 app.use('/blogs', blogRoutes);
+app.use('/blogs/:id/comments', commentRoutes);
 
 
 app.get('/', (req, res) => {

@@ -4,11 +4,11 @@
     <div class="container">
         <h1>Add Your Comment</h1>
 
-        <form action="/blogs/blogID/comment" method="POST" class="mt-2">
+        <form action="/blogs/<%= blogID %>/comments" method="POST" class="mt-2">
 
             <div class="form-group">
               <label for="text">Comment</label>
-              <textarea class="form-control" name="comment" id="comment" rows="5"></textarea>
+              <textarea class="form-control" name="text" id="commentText" rows="5"></textarea>
             </div>    
 
             <button class="btn btn-lg btn-info">Submit</button>

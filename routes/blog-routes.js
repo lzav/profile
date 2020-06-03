@@ -1,5 +1,7 @@
 const Router = require('express').Router();
 const Blog = require('../models/blog');
+const middleware = require('../middleware');
+// const Comment = require('../models/comment');
 
 Router.get('/', (req, res) => {
 
@@ -18,12 +20,12 @@ Router.get('/', (req, res) => {
 });
 
 
-Router.get('/new', isLoggedIn, (req, res) => {
+Router.get('/new', middleware.isLoggedIn, (req, res) => {
     res.render('./blogs/new');
 });
 
 
-Router.post('/', isLoggedIn, (req, res) => {
+Router.post('/', middleware.isLoggedIn, (req, res) => {
 
     const author = {
         id: req.user._id,
@@ -51,8 +53,10 @@ Router.post('/', isLoggedIn, (req, res) => {
 
 Router.get('/:id', (req, res) => {
     
-    Blog.findById(req.params.id)
+    Blog.findById(req.params.id).populate('comments').exec()
         .then(foundBlog => {
+
+            // console.log(foundBlog);
             
             res.render('./blogs/show', {blog: foundBlog});
         })
@@ -97,17 +101,6 @@ Router.delete('/:id', (req, res) => {
         })
         .catch(err => console.log(err));
 });
-
-
-function isLoggedIn(req, res, next) {
-    if (req.isAuthenticated()) {
-        // User logged in
-        next();
-    } else {
-        // User NOT logged in
-        res.redirect('/auth/login');
-    }
-}
 
 
 module.exports = Router;

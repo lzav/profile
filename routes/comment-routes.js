@@ -1,8 +1,9 @@
 const Router = require('express').Router({mergeParams: true});
 const Blog = require('../models/blog');
 const Comment = require('../models/comment');
+const middleware = require('../middleware');
 
-Router.get('/new', (req, res) => {
+Router.get('/new', middleware.isLoggedIn, (req, res) => {
     // res.send('reached comment index route');
     console.log(req.params);
 
@@ -13,11 +14,7 @@ Router.get('/new', (req, res) => {
     res.render('./comments/new', {blogID: req.params.id});
 });
 
-Router.post('/', (req, res) => {
-    // res.send('reached post route for comment');
-    // console.log(req.params);
-    // console.log(req.user);
-    // console.log(req.body);
+Router.post('/', middleware.isLoggedIn, (req, res) => {
 
     // save comment, add to comments array in blog, redirect to blog details page
     // check blog exists first, so cannot crash with too many empty comments not related to a blog
@@ -31,19 +28,23 @@ Router.post('/', (req, res) => {
                     displayName: req.user.displayName
                 }
 
-                // Save comment
+                // save comment
                 Comment.create({
                     text: req.body.text,
                     author: author
                 })
                     .then(savedComment => {
-                        // push to blog array
 
-                        console.log('Comment Saved: ' + savedComment);
+                        // push commentID to blog array and save
+                        foundBlog.comments.push(savedComment._id);
+                        foundBlog.save()
+                            .then(updatedBlog => console.log('Blog updated'));
+
+                        // console.log('Comment Saved: ' + savedComment);
                         res.redirect(`/blogs/${req.params.id}`);
                     })
             } else {
-                // could not find blog id, so redirect to blogs
+                // blog id not found, so redirect to blogs
                 res.redirect('/blogs');
             }
         })
@@ -52,5 +53,16 @@ Router.post('/', (req, res) => {
             res.redirect('/blogs');
         });
 });
+
+Router.get('/:comment_id/edit', (req, res) => {
+    // res.send('reached comment edit route for: ' + req.params.comment_id);
+    Comment.findById(req.params.comment_id)
+        .then(foundComment => res.render('./comments/edit', {blogID: req.params.id, comment: foundComment}))
+        .catch(err => {
+            console.log(err);
+            res.redirect('/blogs');
+        });    
+});
+
 
 module.exports = Router;

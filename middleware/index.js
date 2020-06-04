@@ -31,5 +31,28 @@ middlewareObj.isBlogAuthor = function(req, res, next) {
         })
 }
 
+middlewareObj.isCommentAuthor = function(req, res, next) {
+    // console.log(req.params);
+    console.log('Got to comment author middleware');
+
+
+
+    Comment.findById(req.params.comment_id)
+        .then(foundComment => {
+            if (foundComment && foundComment.author.id.equals(req.user._id)) {
+                console.log('Comment found and user is author');
+                next();
+            } else {
+                // not author of comment
+                console.log('User is NOT the author of the comment');
+                res.redirect('back');
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            res.redirect('/blogs');
+        })    
+}
+
 
 module.exports = middlewareObj;

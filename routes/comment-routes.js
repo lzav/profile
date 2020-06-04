@@ -11,7 +11,7 @@ Router.get('/new', middleware.isLoggedIn, (req, res) => {
 Router.post('/', middleware.isLoggedIn, (req, res) => {
 
     // save comment, add to comments array in blog, redirect to blog details page
-    // check blog exists first, so cannot crash with too many empty comments not related to a blog
+    // check blog exists first, to ensure comments related to a blog
 
     Blog.findById(req.params.id)
         .then(foundBlog => {
@@ -48,7 +48,7 @@ Router.post('/', middleware.isLoggedIn, (req, res) => {
         });
 });
 
-Router.get('/:comment_id/edit', (req, res) => {
+Router.get('/:comment_id/edit', middleware.isLoggedIn, middleware.isCommentAuthor, (req, res) => {
     // res.send('reached comment edit route for: ' + req.params.comment_id);
     Comment.findById(req.params.comment_id)
         .then(foundComment => res.render('./comments/edit', {blogID: req.params.id, comment: foundComment}))
@@ -58,7 +58,7 @@ Router.get('/:comment_id/edit', (req, res) => {
         });    
 });
 
-Router.patch('/:comment_id', (req, res) => {
+Router.patch('/:comment_id', middleware.isLoggedIn, middleware.isCommentAuthor, (req, res) => {
     // res.send('reached patch for comments');
 
     Comment.findByIdAndUpdate(req.params.comment_id, {$set: {text: req.body.text}})
@@ -72,7 +72,7 @@ Router.patch('/:comment_id', (req, res) => {
         });
 });
 
-Router.delete('/:comment_id', (req, res) => {
+Router.delete('/:comment_id', middleware.isLoggedIn, middleware.isCommentAuthor, (req, res) => {
     // res.send('reached delete for comments');
 
     Comment.findByIdAndDelete(req.params.comment_id)

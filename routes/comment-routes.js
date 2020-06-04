@@ -4,13 +4,7 @@ const Comment = require('../models/comment');
 const middleware = require('../middleware');
 
 Router.get('/new', middleware.isLoggedIn, (req, res) => {
-    // res.send('reached comment index route');
-    console.log(req.params);
-
-    // Blog.findById(req.params.id)
-    //     .then(result => console.log(result))
-    //     .catch(err => console.log(err));
-
+ 
     res.render('./comments/new', {blogID: req.params.id});
 });
 
@@ -62,6 +56,17 @@ Router.get('/:comment_id/edit', (req, res) => {
             console.log(err);
             res.redirect('/blogs');
         });    
+});
+
+Router.patch('/:comment_id', (req, res) => {
+    // res.send('reached patch for comments');
+
+    Comment.findByIdAndUpdate(req.params.comment_id, {$set: {text: req.body.text}})
+        .then(updatedComment => {
+            console.log(updatedComment);
+            res.redirect(`/blogs/${req.params.id}`);
+        })
+
 });
 
 

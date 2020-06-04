@@ -13,7 +13,11 @@ const blogRoutes = require('./routes/blog-routes');
 const commentRoutes = require('./routes/comment-routes');
 
 
-mongoose.connect('mongodb://localhost:27017/blog', {useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect('mongodb://localhost:27017/blog', {
+    useNewUrlParser: true, 
+    useUnifiedTopology: true, 
+    useFindAndModify: false
+})
     .catch(err => console.log(err));
 
 mongoose.connection

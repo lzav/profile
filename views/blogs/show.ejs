@@ -15,7 +15,7 @@
             <a href="/blogs/<%= blog._id %>/comments/new" class="btn btn-warning">Comment</a>
         </div>
 
-        <div class="border border-dark mt-1">
+        <div class="border border-dark mt-1 p-2">
             <% for (let comment of blog.comments) { %>
                 <h4><%= comment.author.displayName %></h4>                    
                 <p><%= comment.text %></p>

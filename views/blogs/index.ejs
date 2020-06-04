@@ -10,7 +10,7 @@
 
         <% for (let blog of blogs) { %>
             <h4><a href="/blogs/<%= blog._id %>"><%= blog.title %></a></h4>
-            <p><%= blog.text %></p>
+            <p class="blogText"><%= blog.text %></p>
             <hr />
         <% } %>
 

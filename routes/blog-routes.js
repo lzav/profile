@@ -66,10 +66,12 @@ Router.get('/:id', (req, res) => {
         })
 });
 
-Router.get('/:id/edit', (req, res) => {
 
+Router.get('/:id/edit', middleware.isLoggedIn, middleware.isBlogAuthor, (req, res) => {
+   
     Blog.findById(req.params.id)
     .then(foundBlog => {
+        
         res.render('./blogs/edit', {blog: foundBlog});
     })
     .catch(err => {
@@ -79,7 +81,7 @@ Router.get('/:id/edit', (req, res) => {
 
 });
 
-Router.patch('/:id', (req, res) => {
+Router.patch('/:id', middleware.isLoggedIn, middleware.isBlogAuthor, (req, res) => {
         
     Blog.findByIdAndUpdate(req.params.id, {$set: {title: req.body.title, text: req.body.text}})
         .then(updatedBlog => {
@@ -92,7 +94,7 @@ Router.patch('/:id', (req, res) => {
         });
 });
 
-Router.delete('/:id', (req, res) => {
+Router.delete('/:id', middleware.isLoggedIn, middleware.isBlogAuthor, (req, res) => {
     
     Blog.findOneAndDelete(req.params.id)
         .then(result => {

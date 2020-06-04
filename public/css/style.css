@@ -34,3 +34,7 @@ body {
     }
 }
 
+.blogText {
+    white-space: pre-wrap;
+}
+

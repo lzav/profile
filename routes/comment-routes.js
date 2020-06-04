@@ -66,8 +66,24 @@ Router.patch('/:comment_id', (req, res) => {
             console.log(updatedComment);
             res.redirect(`/blogs/${req.params.id}`);
         })
-
+        .catch(err => {
+            console.log(err);
+            res.redirect('/blogs');
+        });
 });
 
+Router.delete('/:comment_id', (req, res) => {
+    // res.send('reached delete for comments');
+
+    Comment.findByIdAndDelete(req.params.comment_id)
+        .then(result => {
+            // console.log(result);
+            res.redirect(`/blogs/${req.params.id}`);
+        })
+        .catch(err => {
+            console.log(err);
+            res.redirect('/blogs');
+        });
+});
 
 module.exports = Router;

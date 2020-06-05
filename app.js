@@ -11,6 +11,7 @@ const expressSession = require('express-session');
 const authRoutes = require('./routes/auth-routes');
 const blogRoutes = require('./routes/blog-routes');
 const commentRoutes = require('./routes/comment-routes');
+const flash  = require('connect-flash');
 
 
 mongoose.connect('mongodb://localhost:27017/blog', {
@@ -36,8 +37,8 @@ app.use(expressSession({
     maxAge: 24*60*60*1000
 }));
 
+app.use(flash());
 app.use(methodOverride('_method'));
-
 app.use(bodyParser.urlencoded({
     extended: true
 }));
@@ -46,6 +47,10 @@ app.use(bodyParser.urlencoded({
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use((req, res, next) => {
+    res.locals.currentUser = req.user;
+    next();
+});
 
 // ROUTES
 
@@ -55,7 +60,6 @@ app.use('/blogs/:id/comments', commentRoutes);
 
 
 app.get('/', (req, res) => {
-    console.log('Is the user authenticated? ' + req.isAuthenticated());
     res.render('index');
 });
 

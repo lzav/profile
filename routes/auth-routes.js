@@ -9,6 +9,7 @@ const transporter = require('../config/nodemailer-config');
 // AUTH ROUTES
 
 router.get('/login', (req, res) => {
+
     res.render('login');
 });
 
@@ -102,6 +103,7 @@ router.post('/register', (req, res) => {
               .catch(err => console.log(err));
 
             // Redirect to home with flash message
+            req.flash('success', 'Thank you for signing up. Please click the link in the confirmation email to complete your registration.');
             res.redirect('/');
           })
     })
@@ -124,6 +126,7 @@ router.get('/confirm/:user_id/:rString', (req, res) => {
         foundUser.updateOne({$set:{confirmed: true, rString: null}})
           .then(result => {            
             // console.log('Updated user confirmed: ' + result);
+            req.flash('success', 'Thank you for confirming your registration. Please sign in below.');
             res.redirect('/auth/login');
           });        
 

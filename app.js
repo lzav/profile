@@ -48,6 +48,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use((req, res, next) => {
+    res.locals.flashSuccess = req.flash('success');
+    res.locals.flashError = req.flash('error');
+    
     res.locals.currentUser = req.user;
     next();
 });

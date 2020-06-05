@@ -9,13 +9,12 @@ middlewareObj.isLoggedIn = function(req, res, next) {
         next();
     } else {
         // User NOT logged in
+        req.flash("error", "Please log in or register below.");
         res.redirect('/auth/login');
     }
 }
 
 middlewareObj.isBlogAuthor = function(req, res, next) {
-    // console.log(req.params);
-    // console.log(req.user);
 
     Blog.findById(req.params.id)
         .then(foundBlog => {
@@ -26,17 +25,14 @@ middlewareObj.isBlogAuthor = function(req, res, next) {
             } else {
                 // Not author of blog - redirect back
                 console.log('Is NOT author of blog');
+                req.flash('error', 'Sorry. You are not the author of this blog.')
                 res.redirect('back');
             }
         })
 }
 
 middlewareObj.isCommentAuthor = function(req, res, next) {
-    // console.log(req.params);
-    console.log('Got to comment author middleware');
-
-
-
+    
     Comment.findById(req.params.comment_id)
         .then(foundComment => {
             if (foundComment && foundComment.author.id.equals(req.user._id)) {
@@ -44,6 +40,7 @@ middlewareObj.isCommentAuthor = function(req, res, next) {
                 next();
             } else {
                 // not author of comment
+                req.flash('error', 'Sorry. You are not the author of this comment.');
                 console.log('User is NOT the author of the comment');
                 res.redirect('back');
             }

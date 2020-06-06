@@ -66,6 +66,10 @@ app.get('/', (req, res) => {
     res.render('index');
 });
 
+app.get('/contact', (req, res) => {
+    res.send('Contact route');
+});
+
 
 // START SERVER
 

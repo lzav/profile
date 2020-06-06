@@ -8,10 +8,12 @@ const passport = require('passport');
 const passportConfig = require('./config/passport-config');
 const keys = require('./config/keys');
 const cookieSession = require('cookie-session');
+const indexRoutes = require('./routes/index');
 const authRoutes = require('./routes/auth-routes');
 const blogRoutes = require('./routes/blog-routes');
 const commentRoutes = require('./routes/comment-routes');
 const flash  = require('connect-flash');
+const transporter = require("./config/nodemailer-config");
 
 
 mongoose.connect('mongodb://localhost:27017/blog', {
@@ -48,27 +50,16 @@ app.use(passport.session());
 
 app.use((req, res, next) => {
     res.locals.flashSuccess = req.flash('success');
-    res.locals.flashError = req.flash('error');
-    
+    res.locals.flashError = req.flash('error');    
     res.locals.currentUser = req.user;
     next();
 });
 
 // ROUTES
-
+app.use('/', indexRoutes);
 app.use('/auth', authRoutes);
 app.use('/blogs', blogRoutes);
 app.use('/blogs/:id/comments', commentRoutes);
-
-
-app.get('/', (req, res) => {
-    // console.log('Is the user authenticated? ' + req.isAuthenticated());
-    res.render('index');
-});
-
-app.get('/contact', (req, res) => {
-    res.send('Contact route');
-});
 
 
 // START SERVER

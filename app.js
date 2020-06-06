@@ -7,7 +7,6 @@ const methodOverride = require('method-override');
 const passport = require('passport');
 const passportConfig = require('./config/passport-config');
 const keys = require('./config/keys');
-// const expressSession = require('express-session');
 const cookieSession = require('cookie-session');
 const authRoutes = require('./routes/auth-routes');
 const blogRoutes = require('./routes/blog-routes');
@@ -30,15 +29,9 @@ mongoose.connection
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 
-// Cookies
-// app.use(expressSession({
-//     secret: keys.expressSession.secret,
-//     saveUninitialized: true,
-//     resave: false,
-//     maxAge: 24*60*60*1000
-// }));
 
 app.use(cookieSession({
+    name: 'lzdev',
     secret: keys.expressSession.secret,
     maxAge: 24*60*60*1000
 }));
@@ -69,7 +62,7 @@ app.use('/blogs/:id/comments', commentRoutes);
 
 
 app.get('/', (req, res) => {
-    console.log('Is the user authenticated? ' + req.isAuthenticated());
+    // console.log('Is the user authenticated? ' + req.isAuthenticated());
     res.render('index');
 });
 

@@ -7,7 +7,8 @@ const methodOverride = require('method-override');
 const passport = require('passport');
 const passportConfig = require('./config/passport-config');
 const keys = require('./config/keys');
-const expressSession = require('express-session');
+// const expressSession = require('express-session');
+const cookieSession = require('cookie-session');
 const authRoutes = require('./routes/auth-routes');
 const blogRoutes = require('./routes/blog-routes');
 const commentRoutes = require('./routes/comment-routes');
@@ -30,10 +31,15 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 
 // Cookies
-app.use(expressSession({
+// app.use(expressSession({
+//     secret: keys.expressSession.secret,
+//     saveUninitialized: true,
+//     resave: false,
+//     maxAge: 24*60*60*1000
+// }));
+
+app.use(cookieSession({
     secret: keys.expressSession.secret,
-    saveUninitialized: true,
-    resave: false,
     maxAge: 24*60*60*1000
 }));
 
@@ -63,6 +69,7 @@ app.use('/blogs/:id/comments', commentRoutes);
 
 
 app.get('/', (req, res) => {
+    console.log('Is the user authenticated? ' + req.isAuthenticated());
     res.render('index');
 });
 

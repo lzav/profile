@@ -56,7 +56,7 @@ Router.get('/:id', (req, res) => {
     Blog.findById(req.params.id).populate('comments').exec()
         .then(foundBlog => {
 
-            // console.log(foundBlog);
+            console.log(foundBlog.comments.length);
             
             res.render('./blogs/show', {blog: foundBlog});
         })

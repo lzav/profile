@@ -24,23 +24,25 @@
             <a href="/blogs/<%= blog._id %>/comments/new" class="btn btn-warning">Comment</a>
         </div>
 
-        <div class="border border-dark mt-1 p-2">
-            <% for (let comment of blog.comments) { %>
-                <h4><%= comment.author.displayName %></h4>                    
-                <p><%= comment.text %></p>
-                
-                <% if (currentUser && comment.author.id.equals(currentUser._id)) { %>
-                    <a href="/blogs/<%= blog._id %>/comments/<%= comment._id %>/edit" class="btn btn-warning">Edit</a>
+        <% if (blog.comments.length != 0) { %>
+            <div class="border border-dark mt-1 p-2">
+                <% for (let comment of blog.comments) { %>
+                    <h4><%= comment.author.displayName %></h4>                    
+                    <p><%= comment.text %></p>
+                    
+                    <% if (currentUser && comment.author.id.equals(currentUser._id)) { %>
+                        <a href="/blogs/<%= blog._id %>/comments/<%= comment._id %>/edit" class="btn btn-warning">Edit</a>
 
-                    <form action="/blogs/<%= blog._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST" class="d-inline">
-                        <input type="submit" value="Delete" class="btn btn-danger">
-                    </form>
-                <% } %> 
+                        <form action="/blogs/<%= blog._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST" class="d-inline">
+                            <input type="submit" value="Delete" class="btn btn-danger">
+                        </form>
+                    <% } %> 
 
-                <hr/>  
+                    <hr/>  
 
-            <% } %>
-        </div>
+                <% } %>
+            </div>            
+        <% } %>
    
     </div>
 </div>

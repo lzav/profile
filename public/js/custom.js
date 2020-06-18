@@ -46,25 +46,5 @@ $(document).ready( setTopMargin() );
 $(window).resize( setTopMargin() );
 
 
-// Contact form data-validation
 
-const contactForm = document.getElementById('contact-form');
-
-console.log(contactForm);
-
-contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    const name = document.getElementById('name');
-    const email = document.getElementById('email');
-    const message = document.getElementById('message');
-
-
-    if (!name.value || !email.value || !message.value) {
-        console.log('Please fill in this field');
-
-        
-    }
-
-});
 

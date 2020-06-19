@@ -5,6 +5,7 @@ const contactForm = document.getElementById("contact-form");
 contactForm.addEventListener("submit", (e) => {
   e.preventDefault();
 
+  // remove old warnings
   const oldWarnings = document.querySelectorAll(".invalid-feedback");
   const inputWarnings = document.querySelectorAll(".is-invalid");
   removeOldWarnings(oldWarnings, inputWarnings);

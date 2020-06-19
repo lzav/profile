@@ -44,7 +44,3 @@ function setTopMargin() {
 $(document).ready( setTopMargin() );
 
 $(window).resize( setTopMargin() );
-
-
-
-

@@ -1,74 +1,93 @@
-// Contact form data-validation
-
-const contactForm = document.getElementById('contact-form');
-
-console.log(contactForm);
-
-contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    const name = document.getElementById('name');
-    const email = document.getElementById('email');
-    const message = document.getElementById('message');
-
-
-    if (!name.value || !email.value || !message.value) {
-        console.log('Please fill in this field');        
-    }
-
-});
-
-
-
-
-// SOF CONTACT FORM VALIDATION
+// CONTACT FORM VALIDATION
 
 const contactForm = document.getElementById("contact-form");
 
 contactForm.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  // remove old warning
-  const oldWarnings = document.querySelectorAll(".warning-class");
+  const oldWarnings = document.querySelectorAll(".invalid-feedback");
+  const inputWarnings = document.querySelectorAll(".is-invalid");
+  removeOldWarnings(oldWarnings, inputWarnings);
 
-  if (oldWarnings) {
-    for (let e of oldWarnings) {
-      e.remove();
-    }
-  }
-
-  // check input boxes have a value
-  const inputBoxes = document.querySelectorAll(".form-control");
- 
-  for (let e of inputBoxes) {
-    if (!e.value) { 
-      addFeedbackBox(e, "Please complete this field."); 
-     }
-  }
-
-  // validate email
-  const email = document.getElementById("email");
-
-  // if email is blank, leave current message and exit
-  if (!email.value) { return; }
+  // Check input boxes contain a value. If not, add feedback and set boolean warning to true
+  const warnings = notBlank();
 
   // email validation and warning message
+  const email = document.getElementById("email");
+
+  // if email blank, leave current message and exit
+  if (!email.value && warnings) return;
+
   if (!validateEmail(email.value)) {
     addFeedbackBox(email, "Please enter a valid email address.");
     return;
   }
-  
+
+  if (warnings) return;
+
+  e.target.submit();
 });
+
 
 // EOF CONTACT FORM SUBMIT
 
 
+// INPUT CHANGE
+const inputBoxes = document.querySelectorAll(".form-control");
+
+for (let inputBox of inputBoxes) {
+  inputBox.addEventListener('input', (e) => {
+    let inputWarnings = [e.target]
+    let oldWarnings = []
+
+    const nextSibling = e.target.nextSiblingElement;
+
+    if (nextSibling.classList.contains('is-invalid')) {
+      oldWarnings.push(nextSibling);
+    }
+    
+    removeOldWarnings(oldWarnings, inputWarnings);
+  })
+}
+//EOF INPUT CHANGE
+
+
+function removeOldWarnings(oldWarnings, inputWarnings) {
+  if (oldWarnings) {
+    for (let oldWarning of oldWarnings) {
+      oldWarning.remove();
+    }
+  }
+
+  if(inputWarnings) {
+    for (let inputWarning of inputWarnings) {
+      inputWarning.classList.remove('is-invalid');
+    }
+  }
+
+}
+
+function notBlank() {
+  const inputBoxes = document.querySelectorAll(".form-control");
+  let warnings = false;
+
+  for (let e of inputBoxes) {
+    if (!e.value) {
+      addFeedbackBox(e, "Please complete this field.");
+      warnings = true;
+    }
+  }
+
+  return warnings;
+}
+
 function addFeedbackBox(e, message) {
   const warnIt = document.createElement("div");
   warnIt.appendChild(document.createTextNode(message));
-  warnIt.className = "invalid-feedback";
-
+  warnIt.className = "invalid-feedback d-block";
   e.insertAdjacentElement("afterend", warnIt);
+
+  e.classList.add('is-invalid');
 }
 
 function validateEmail(email) {

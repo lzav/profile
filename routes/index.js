@@ -17,7 +17,9 @@ router.post("/contact", (req, res) => {
     from: "lzdev20@***REMOVED***.com",
     to: "lzdev20@***REMOVED***.com",
     subject: "Message from Website",
-    text: req.body.message,
+    text: `Message from ${req.body.email}:
+    
+    ${req.body.message}`
   };
 
   transporter

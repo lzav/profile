@@ -1,40 +1,26 @@
 const contactForm = document.getElementById("contact-form");
 
 contactForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-    
+  
+  const textInputs = document.querySelectorAll(".form-control");
+  let containsErrors = false;
+  
+  for (let textInput of textInputs) {
+    containsErrors = checkInputs(textInput) || containsErrors;
+  }
+
+  if (containsErrors) e.preventDefault();
+
 });
 
-(function addEventListeners() {
+
+(function addEventListenersToInputs() {
   const textInputs = document.querySelectorAll(".form-control");
 
   for (let textInput of textInputs) {
-    // add to inputs except email
-    if (textInput.id != "email") {
-      textInput.addEventListener("focusout", (e) => {
-        removeMessages(textInput);
-
-        if (isBlank(textInput)) {
-          warningMessage(textInput, "Please fill in this field.");
-        } else {
-          successMessage(textInput);
-        }
-      });
-    }
-
-    // add event listener to email
-    if (textInput.id == "email") {
-      textInput.addEventListener("focusout", (e) => {
-        if (!validateEmail(textInput.value)) {
-          warningMessage(
-            textInput,
-            "Please check your email address. It does not appear valid."
-          );
-        } else {
-          successMessage(textInput);
-        }
-      });
-    }
+    textInput.addEventListener("focusout", (e) => {
+      checkInputs(textInput);
+    });
 
     // add clear to all
     textInput.addEventListener("input", (e) => {
@@ -44,6 +30,27 @@ contactForm.addEventListener("submit", (e) => {
 })();
 
 
+function checkInputs(textInput) {
+  removeMessages(textInput);
+
+
+  if (textInput.id != "email" && isBlank(textInput)) {
+    warningMessage(textInput, "Please fill in this field.");
+    // containsErrors will be return value or false
+    return true; 
+  }
+
+  if (textInput.id == "email" && !validateEmail(textInput.value)) {
+    warningMessage(
+      textInput,
+      "Please check your email address."      
+    );
+    return true;
+  }
+
+  successMessage(textInput);
+ 
+}
 
 function isBlank(inputTarget) {
   return !inputTarget.value ? true : false;

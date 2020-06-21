@@ -1,98 +1,86 @@
-// CONTACT FORM VALIDATION
-
 const contactForm = document.getElementById("contact-form");
 
 contactForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-
-  // remove old warnings
-  const oldWarnings = document.querySelectorAll(".invalid-feedback");
-  const inputWarnings = document.querySelectorAll(".is-invalid");
-  removeOldWarnings(oldWarnings, inputWarnings);
-
-  // Check input boxes contain a value. If not, add feedback and set boolean warning to true
-  const warnings = notBlank();
-
-  // email validation and warning message
-  const email = document.getElementById("email");
-
-  // if email blank, leave current message and exit
-  if (!email.value && warnings) return;
-
-  if (!validateEmail(email.value)) {
-    addFeedbackBox(email, "Please enter a valid email address.");
-    return;
+  
+  const textInputs = document.querySelectorAll(".form-control");
+  let containsErrors = false;
+  
+  for (let textInput of textInputs) {
+    containsErrors = checkInputs(textInput) || containsErrors;
   }
 
-  if (warnings) return;
+  if (containsErrors) e.preventDefault();
 
-  e.target.submit();
 });
 
 
-// EOF CONTACT FORM SUBMIT
+(function addEventListenersToInputs() {
+  const textInputs = document.querySelectorAll(".form-control");
+
+  for (let textInput of textInputs) {
+    textInput.addEventListener("focusout", (e) => {
+      checkInputs(textInput);
+    });
+
+    // add clear to all
+    textInput.addEventListener("input", (e) => {
+      removeMessages(textInput);
+    });
+  }
+})();
 
 
-// INPUT CHANGE
-const inputBoxes = document.querySelectorAll(".form-control");
-
-for (let inputBox of inputBoxes) {
-  inputBox.addEventListener('input', (e) => {
-    let inputWarnings = [e.target]
-    let oldWarnings = []
-
-    const nextSibling = e.target.nextSiblingElement;
-
-    if (nextSibling.classList.contains('is-invalid')) {
-      oldWarnings.push(nextSibling);
-    }
-    
-    removeOldWarnings(oldWarnings, inputWarnings);
-  })
-}
-//EOF INPUT CHANGE
+function checkInputs(textInput) {
+  removeMessages(textInput);
 
 
-function removeOldWarnings(oldWarnings, inputWarnings) {
-  if (oldWarnings) {
-    for (let oldWarning of oldWarnings) {
-      oldWarning.remove();
-    }
+  if (textInput.id != "contactEmail" && isBlank(textInput)) {
+    warningMessage(textInput, "Please fill in this field.");
+    // containsErrors will be return value or false
+    return true; 
   }
 
-  if(inputWarnings) {
-    for (let inputWarning of inputWarnings) {
-      inputWarning.classList.remove('is-invalid');
-    }
+  if (textInput.id == "contactEmail" && !validateEmail(textInput.value)) {
+    warningMessage(
+      textInput,
+      "Please check your email address."      
+    );
+    return true;
   }
 
+  successMessage(textInput); 
 }
 
-function notBlank() {
-  const inputBoxes = document.querySelectorAll(".form-control");
-  let warnings = false;
-
-  for (let e of inputBoxes) {
-    if (!e.value) {
-      addFeedbackBox(e, "Please complete this field.");
-      warnings = true;
-    }
-  }
-
-  return warnings;
-}
-
-function addFeedbackBox(e, message) {
-  const warnIt = document.createElement("div");
-  warnIt.appendChild(document.createTextNode(message));
-  warnIt.className = "invalid-feedback d-block";
-  e.insertAdjacentElement("afterend", warnIt);
-
-  e.classList.add('is-invalid');
+function isBlank(inputTarget) {
+  return !inputTarget.value ? true : false;
 }
 
 function validateEmail(email) {
   const patt = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
   const result = patt.test(email);
   return result;
+}
+
+function removeMessages(inputTarget) {
+  inputTarget.classList.remove("is-invalid", "is-valid");
+
+  const nextThing = inputTarget.nextElementSibling;
+
+  if (nextThing && nextThing.classList.contains("invalid-feedback")) {
+    nextThing.remove();
+  }
+}
+
+function warningMessage(inputTarget, message) {
+  const feedbackBox = document.createElement("div");
+  feedbackBox.className = "invalid-feedback d-block";
+  feedbackText = document.createTextNode(message);
+  feedbackBox.appendChild(feedbackText);
+  inputTarget.insertAdjacentElement("afterend", feedbackBox);
+
+  inputTarget.classList.add("is-invalid");
+}
+
+function successMessage(inputTarget) {
+  inputTarget.classList.add("is-valid");
 }

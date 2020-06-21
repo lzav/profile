@@ -34,13 +34,13 @@ function checkInputs(textInput) {
   removeMessages(textInput);
 
 
-  if (textInput.id != "email" && isBlank(textInput)) {
+  if (textInput.id != "contactEmail" && isBlank(textInput)) {
     warningMessage(textInput, "Please fill in this field.");
     // containsErrors will be return value or false
     return true; 
   }
 
-  if (textInput.id == "email" && !validateEmail(textInput.value)) {
+  if (textInput.id == "contactEmail" && !validateEmail(textInput.value)) {
     warningMessage(
       textInput,
       "Please check your email address."      

@@ -38,9 +38,10 @@
 // });
 
 function setTopMargin() {
-    $("#mainContent").css("margin-top", $("#mainNav").outerHeight(true));
+    $("body").css("margin-top", $("#mainNav").outerHeight(true));
 }
 
 $(document).ready( setTopMargin() );
 
 $(window).resize( setTopMargin() );
+

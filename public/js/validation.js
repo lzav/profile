@@ -1,17 +1,40 @@
+
+// CONTACT FORM VALIDATION
 const contactForm = document.getElementById("contact-form");
 
-contactForm.addEventListener("submit", (e) => {
-  
-  const textInputs = document.querySelectorAll(".form-control");
-  let containsErrors = false;
-  
-  for (let textInput of textInputs) {
-    containsErrors = checkInputs(textInput) || containsErrors;
-  }
+if (contactForm) {
+  contactForm.addEventListener("submit", (e) => {
+    const textInputs = document.querySelectorAll(".form-control");
+    let containsErrors = false;
 
-  if (containsErrors) e.preventDefault();
+    for (let textInput of textInputs) {
+      containsErrors = checkInputs(textInput) || containsErrors;
+    }
 
-});
+    if (containsErrors) e.preventDefault();
+  });
+}
+// EOF CONTACTFORM VALIDATION
+
+// BLOG VALIDATION
+
+const newBlog = document.querySelector('form');
+
+if (newBlog) {
+  newBlog.addEventListener('submit', (e) => {
+
+    const textInputs = document.querySelectorAll(".form-control");
+    let containsErrors = false;
+
+    for (let textInput of textInputs) {
+      containsErrors = checkInputs(textInput) || containsErrors;
+    }
+
+    if (containsErrors) e.preventDefault();
+
+  });
+}
+// EOF BLOG VALIDATION
 
 
 (function addEventListenersToInputs() {
@@ -29,26 +52,21 @@ contactForm.addEventListener("submit", (e) => {
   }
 })();
 
-
 function checkInputs(textInput) {
   removeMessages(textInput);
-
 
   if (textInput.id != "contactEmail" && isBlank(textInput)) {
     warningMessage(textInput, "Please fill in this field.");
     // containsErrors will be return value or false
-    return true; 
-  }
-
-  if (textInput.id == "contactEmail" && !validateEmail(textInput.value)) {
-    warningMessage(
-      textInput,
-      "Please check your email address."      
-    );
     return true;
   }
 
-  successMessage(textInput); 
+  if (textInput.id == "contactEmail" && !validateEmail(textInput.value)) {
+    warningMessage(textInput, "Please check your email address.");
+    return true;
+  }
+
+  successMessage(textInput);
 }
 
 function isBlank(inputTarget) {

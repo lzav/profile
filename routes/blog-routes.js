@@ -95,7 +95,7 @@ Router.patch('/:id', middleware.isLoggedIn, middleware.isBlogAuthor, (req, res) 
 });
 
 Router.delete('/:id', middleware.isLoggedIn, middleware.isBlogAuthor, (req, res) => {
-    
+  
     Blog.findOneAndDelete(req.params.id)
         .then(result => {
             console.log('Blog deleted: ' + result);

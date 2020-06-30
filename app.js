@@ -16,7 +16,7 @@ const flash  = require('connect-flash');
 const transporter = require("./config/nodemailer-config");
 
 
-mongoose.connect('mongodb://localhost:27017/blog', {
+mongoose.connect(`***REMOVED***`, {
     useNewUrlParser: true, 
     useUnifiedTopology: true, 
     useFindAndModify: false

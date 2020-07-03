@@ -1,7 +1,7 @@
 node_modules
 .vscode
 ignore
-./config/keys.js
+**/keys.js
 *.zip
 /backup
 test.html

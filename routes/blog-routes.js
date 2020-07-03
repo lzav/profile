@@ -32,20 +32,26 @@ Router.post('/', middleware.isLoggedIn, (req, res) => {
         displayName: req.user.displayName
     }
 
-    // console.log(`Author is ${author}`);
-    // console.log(`User is ${req.user}`);
-           
+    const {title, text} = req.body;
+
+    // Server form validation
+    if (!title || !text) {
+        req.flash('error', 'Oops! Something went wrong. Please try again later.');
+        return res.redirect('/blogs');
+    }
+        
     Blog.create({
-        title: req.body.title,
-        text: req.body.text,
+        title: title,
+        text: text,
         author: author
     })
         .then(savedBlog => {
-            console.log('Blog saved: ' + savedBlog);
+            // console.log('Blog saved: ' + savedBlog);
             res.redirect('/blogs');
         })
         .catch(err => {
             console.log('Something went wrong saving the blog: '+ err);
+            req.flash('error', 'Oops! Something went wrong. Please try again later.');
             res.redirect('/blogs');
         });
     
@@ -95,7 +101,7 @@ Router.patch('/:id', middleware.isLoggedIn, middleware.isBlogAuthor, (req, res) 
 });
 
 Router.delete('/:id', middleware.isLoggedIn, middleware.isBlogAuthor, (req, res) => {
-    
+  
     Blog.findOneAndDelete(req.params.id)
         .then(result => {
             console.log('Blog deleted: ' + result);

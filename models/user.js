@@ -12,8 +12,8 @@ const userSchema = new mongoose.Schema({
 
 const User = new mongoose.model('User', userSchema);
 
-// User.deleteMany({})
-//     .then(result => console.log(result))
-//     .catch(err => console.log(err));
+User.deleteMany({})
+    .then(result => console.log(result))
+    .catch(err => console.log(err));
 
 module.exports = User;

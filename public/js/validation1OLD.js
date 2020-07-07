@@ -89,7 +89,6 @@ function removeMessages(inputTarget) {
   }
 }
 
-
 function warningMessage(inputTarget, message) {
   const feedbackBox = document.createElement("div");
   feedbackBox.className = "invalid-feedback d-block";

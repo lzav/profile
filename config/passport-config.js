@@ -11,13 +11,8 @@ const bcrypt = require('bcrypt');
 
 // GOOGLE
 passport.use(new GoogleStrategy({
-<<<<<<< HEAD
-    clientID: keys.passport.google.clientID,
-    clientSecret: keys.passport.google.clientSecret,
-=======
     clientID: process.env.GOOGLE_CLIENTID,
     clientSecret: process.env.GOOGLE_CLIENTSECRET,
->>>>>>> dotenv
     callbackURL: "http://localhost:3000/auth/google/callback"
   },
   function(accessToken, refreshToken, profile, done) {
@@ -52,13 +47,8 @@ passport.use(new GoogleStrategy({
 
 // FACEBOOK
 passport.use(new FacebookStrategy({
-<<<<<<< HEAD
-    clientID: keys.passport.facebook.clientID,
-    clientSecret: keys.passport.facebook.clientSecret,
-=======
     clientID: process.env.FACEBOOK_CLIENTID,
     clientSecret: process.env.FACEBOOK_CLIENTSECRET,
->>>>>>> dotenv
     callbackURL: "http://localhost:3000/auth/facebook/callback"
   },
   function(accessToken, refreshToken, profile, done) {    

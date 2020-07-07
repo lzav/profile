@@ -10,6 +10,12 @@ Router.get('/new', middleware.isLoggedIn, (req, res) => {
 
 Router.post('/', middleware.isLoggedIn, (req, res) => {
 
+    // validation - check 
+    if (!req.body.text) {
+        req.flash('error', 'Oops. Something went wrong. Please try again later.');
+        return res.redirect(`/blogs/${req.params.id}`);
+    }
+
     // save comment, add to comments array in blog, redirect to blog details page
     // check blog exists first, to ensure comments related to a blog
 
@@ -59,7 +65,12 @@ Router.get('/:comment_id/edit', middleware.isLoggedIn, middleware.isCommentAutho
 });
 
 Router.patch('/:comment_id', middleware.isLoggedIn, middleware.isCommentAuthor, (req, res) => {
-    // res.send('reached patch for comments');
+    
+    // validation
+    if (!req.body.text) {
+        req.flash('error', 'Oops. Something went wrong. Please try again later');
+        res.redirect(`/blogs/${req.params.id}`);
+    }
 
     Comment.findByIdAndUpdate(req.params.comment_id, {$set: {text: req.body.text}})
         .then(updatedComment => {

@@ -3,7 +3,6 @@ const GoogleStrategy = require('passport-google-oauth20');
 const FacebookStrategy = require('passport-facebook');
 const LocalStrategy= require('passport-local');
 const User = require('../models/user');
-// const keys = require('../config/keys');
 const bcrypt = require('bcrypt');
 
 
@@ -13,7 +12,7 @@ const bcrypt = require('bcrypt');
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENTID,
     clientSecret: process.env.GOOGLE_CLIENTSECRET,
-    callbackURL: "http://localhost:3000/auth/google/callback"
+    callbackURL: process.env.GOOGLE_CALLBACKURL
   },
   function(accessToken, refreshToken, profile, done) {
     // find or create user, then call done with done(err, user)
@@ -49,7 +48,7 @@ passport.use(new GoogleStrategy({
 passport.use(new FacebookStrategy({
     clientID: process.env.FACEBOOK_CLIENTID,
     clientSecret: process.env.FACEBOOK_CLIENTSECRET,
-    callbackURL: "http://localhost:3000/auth/facebook/callback"
+    callbackURL: process.env.FACEBOOK_CALLBACKURL
   },
   function(accessToken, refreshToken, profile, done) {    
     

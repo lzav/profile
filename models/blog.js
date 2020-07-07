@@ -25,6 +25,7 @@ const Blog = new mongoose.model('Blog', BlogSchema);
 //     .then(result => console.log(result))
 //     .catch(err => console.log(err));
 
+<<<<<<< HEAD
 // Blog.create({
 //     title: "Blog 1 about something junior developery",
 //     text: "This is blog text"
@@ -32,4 +33,6 @@ const Blog = new mongoose.model('Blog', BlogSchema);
 //     .then(savedBlog => console.log("Blog saved: " + savedBlog))
 //     .catch(err => console.log(err));
 
+=======
+>>>>>>> dotenv
 module.exports = Blog;

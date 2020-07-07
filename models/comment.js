@@ -11,4 +11,14 @@ const commentSchema = new mongoose.Schema({
     }
 });
 
+<<<<<<< HEAD
 module.exports = new mongoose.model('comment', commentSchema);
+=======
+const Comment = mongoose.model('Comment', commentSchema);
+
+// Comment.deleteMany({})
+//     .then(result => console.log(result))
+//     .catch(err => console.log(err));
+
+module.exports = Comment;
+>>>>>>> dotenv

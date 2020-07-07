@@ -16,7 +16,11 @@ const flash  = require('connect-flash');
 const transporter = require("./config/nodemailer-config");
 
 
+<<<<<<< HEAD
 mongoose.connect(`***REMOVED***`, {
+=======
+mongoose.connect(process.env.MONGODB_URL, {
+>>>>>>> dotenv
     useNewUrlParser: true, 
     useUnifiedTopology: true, 
     useFindAndModify: false
@@ -34,7 +38,11 @@ app.use(express.static('public'));
 
 app.use(cookieSession({
     name: 'lzdev',
+<<<<<<< HEAD
     secret: keys.expressSession.secret,
+=======
+    secret: process.env.EXPRESSSESSION_SECRET,
+>>>>>>> dotenv
     maxAge: 24*60*60*1000
 }));
 

@@ -31,7 +31,10 @@ router.post("/contact", (req, res) => {
     ${message}`
   };
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> dotenv
   transporter
     .sendMail(mailOptions)
     .then((info) => {

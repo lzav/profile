@@ -1,0 +1,9 @@
+node_modules
+.env
+.vscode
+ignore
+keys.js
+*.zip
+/backup
+test.html
+practice.js

@@ -1,0 +1,48 @@
+<%- include('./partials/header') %>
+
+  <div class="jumbotron">
+
+    <div class="container">
+
+      <%- include('./partials/flashMessages') %>    
+
+      <div class="row">
+        <div class="col-6 border border-dark rounded p-3">
+          <h2 class="text-center">Login or Signup Below</h2>
+
+          <hr class="my-4">
+
+          <div class="d-flex justify-content-center">      
+            <a class="btn btn-info btn-lg mr-2" href="/auth/google" role="button"><span class="fa fa-google"></span> Google</a>
+            <a class="btn btn-info btn-lg mr-2" href="/auth/facebook" role="button"><span class="fa fa-facebook"></span> Facebook</a>
+            <!-- <a class="btn btn-info btn-lg" href="/auth/twitter" role="button"><span class="fa fa-twitter"></span> Twitter</a> -->
+          </div>
+
+      
+          <form action="/auth/login" method="POST" class="mt-2">
+
+            <div class="form-group">
+              <label for="login">Email</label>
+              <input type="text" name="email" id="login" placeholder="Email" class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label for="psw">Password</label>
+              <input type="password" name="password" id="password" placeholder="Password" class="form-control">
+            </div>    
+
+            <button class="btn btn-lg btn-info">Submit</button>
+            
+          </form>
+
+          <a href="/auth/register" class="d-block mt-2"> Don't have a login? Sign up here!</a>
+
+        </div>
+      </div>
+
+    </div>    
+    
+  </div>
+
+
+<%- include('./partials/footer') %>

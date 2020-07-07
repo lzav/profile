@@ -1,0 +1,23 @@
+<%- include('../partials/header') %>
+
+<div class="jumbotron">
+    <div class="container">
+
+        <%- include('../partials/flashMessages') %>
+
+        <h1>Blogs</h1>
+
+        <a href="/blogs/new" class="btn btn-primary">Create a new blog</a>
+
+        <hr />
+
+        <% for (let blog of blogs) { %>
+            <h4><a href="/blogs/<%= blog._id %>"><%= blog.title %></a> by <%= blog.author.displayName %></h4>
+            <p class="blogText"><%= blog.text %></p>
+            <hr />
+        <% } %>
+
+    </div>
+</div>
+
+<%- include('../partials/footer') %>

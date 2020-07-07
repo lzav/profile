@@ -1,0 +1,50 @@
+<%- include('../partials/header') %>
+
+<div class="jumbotron">
+    <div class="container">
+
+
+        <%- include('../partials/flashMessages') %>
+        
+
+        <h1><%= blog.title %> by <%= blog.author.displayName %></h1>
+        <p class="blogText"><%= blog.text %></p>
+
+        
+        <% if (currentUser && blog.author.id.equals(currentUser._id)) { %>
+            <a href="/blogs/<%= blog._id %>/edit" class="btn btn-primary">Edit</a>
+
+            <form action="/blogs/<%= blog._id %>?_method=DELETE" method="POST" class="d-inline">
+                <input type="submit" value="Delete" class="btn btn-danger">
+            </form>            
+        <% } %>   
+        
+
+        <div class="pt-2">
+            <a href="/blogs/<%= blog._id %>/comments/new" class="btn btn-warning">Comment</a>
+        </div>
+
+        <% if (blog.comments.length != 0) { %>
+            <div class="border border-dark mt-1 p-2">
+                <% for (let comment of blog.comments) { %>
+                    <h4><%= comment.author.displayName %></h4>                    
+                    <p><%= comment.text %></p>
+                    
+                    <% if (currentUser && comment.author.id.equals(currentUser._id)) { %>
+                        <a href="/blogs/<%= blog._id %>/comments/<%= comment._id %>/edit" class="btn btn-warning">Edit</a>
+
+                        <form action="/blogs/<%= blog._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST" class="d-inline">
+                            <input type="submit" value="Delete" class="btn btn-danger">
+                        </form>
+                    <% } %> 
+
+                    <hr/>  
+
+                <% } %>
+            </div>            
+        <% } %>
+   
+    </div>
+</div>
+
+<%- include('../partials/footer') %>

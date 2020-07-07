@@ -1,0 +1,36 @@
+body {
+    background: #788fa1;
+    font-family: Montserrat;
+    background-image: url('/images/clouds-sea.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.nav-link {
+    text-transform: uppercase;
+}
+
+#mainNav .navbar-brand {
+    color: #ff9933;
+}
+
+#mainNav, .navbar-brand {
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: #ffffff;
+}
+
+
+@media (max-width: 992px) {
+    h1 {
+        font-size: 2rem;
+    }
+}
+
+.blogText {
+    white-space: pre-wrap;
+}
+
+.jumbotron {
+    padding-top: 1.5em;
+}

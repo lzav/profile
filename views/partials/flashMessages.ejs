@@ -1,0 +1,23 @@
+<% if (flashError && flashError.length > 0) { %>
+    <div class="row">
+      <div class="col">
+        
+          <div class="alert alert-warning" role="alert">
+            <%= flashError %>
+          </div>            
+        
+      </div>
+    </div>
+<% } %>
+
+<% if (flashSuccess && flashSuccess.length > 0) { %>
+  <div class="row">
+    <div class="col">
+      
+        <div class="alert alert-success" role="alert">
+          <%= flashSuccess %>
+        </div>            
+      
+    </div>
+  </div>
+<% } %>

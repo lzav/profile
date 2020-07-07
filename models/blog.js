@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const BlogSchema = new mongoose.Schema({
+const blogSchema = new mongoose.Schema({
     title: String,
     image: String,
     text: String,
@@ -14,12 +14,12 @@ const BlogSchema = new mongoose.Schema({
     comments: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'comment'
+            ref: 'Comment'
         }
     ]
 });
 
-const Blog = new mongoose.model('Blog', BlogSchema);
+const Blog = new mongoose.model('Blog', blogSchema);
 
 // Blog.deleteMany({})
 //     .then(result => console.log(result))

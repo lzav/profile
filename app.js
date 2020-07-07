@@ -6,7 +6,6 @@ const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const passport = require('passport');
 const passportConfig = require('./config/passport-config');
-const keys = require('./config/keys');
 const cookieSession = require('cookie-session');
 const indexRoutes = require('./routes/index');
 const authRoutes = require('./routes/auth-routes');

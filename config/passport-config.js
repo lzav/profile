@@ -3,7 +3,7 @@ const GoogleStrategy = require('passport-google-oauth20');
 const FacebookStrategy = require('passport-facebook');
 const LocalStrategy= require('passport-local');
 const User = require('../models/user');
-const keys = require('../config/keys');
+// const keys = require('../config/keys');
 const bcrypt = require('bcrypt');
 
 

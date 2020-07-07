@@ -1,8 +1,5 @@
 node_modules
-<<<<<<< HEAD
-=======
 .env
->>>>>>> dotenv
 .vscode
 ignore
 keys.js

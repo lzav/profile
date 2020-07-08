@@ -117,6 +117,7 @@ passport.use(new LocalStrategy({
             .catch(err => {
                 // flash message something went wrong. Please try again later
                 console.log(err);
+                req.flash('error', 'Oops. Something went wrong. Please try again later.');
                 res.redirect('/auth/login');
             });
     }

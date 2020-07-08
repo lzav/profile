@@ -28,7 +28,11 @@ router.get(
 
 router.get(
   "/google/callback",
-  passport.authenticate("google", { failureRedirect: "/login" }),
+  passport.authenticate("google", {
+    failureRedirect: "/login",
+    failureFlash: true,
+    failureFlash: "Oops. Something went wrong. Please try again later.",
+  }),
 
   function (req, res) {
     // Successful authentication, redirect home.
@@ -42,11 +46,14 @@ router.get("/facebook", passport.authenticate("facebook"));
 
 router.get(
   "/facebook/callback",
-  passport.authenticate("facebook", { failureRedirect: "/login" }),
+  passport.authenticate("facebook", {
+    failureRedirect: "/login",
+    failureFlash: true,
+    failureFlash: "Oops. Something went wrong. Please try again later.",
+  }),
 
   (req, res) => {
     // Successful authentication, redirect home.
-    console.log("Logged in with facebook");
     res.redirect("/");
   }
 );
@@ -58,8 +65,11 @@ router.post(
   passport.authenticate("local", {
     successRedirect: "/",
     failureRedirect: "/auth/login",
+    failureFlash: true,
+    failureFlash: "Please check your username or password.",
   })
 );
+
 // EOF LOCAL STRATEGY
 
 // REGISTER
@@ -124,7 +134,7 @@ router.post("/register", (req, res) => {
     })
     .catch((err) => {
       console.log(err);
-      req.flash('error', 'Oops. Something went wrong. Please try again later.');
+      req.flash("error", "Oops. Something went wrong. Please try again later.");
       res.redirect("/auth/login");
     });
 });

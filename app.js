@@ -13,6 +13,7 @@ const blogRoutes = require('./routes/blog-routes');
 const commentRoutes = require('./routes/comment-routes');
 const flash  = require('connect-flash');
 const transporter = require("./config/nodemailer-config");
+const secure = require('express-force-https');
 
 
 mongoose.connect(process.env.MONGODB_URL, {
@@ -53,6 +54,8 @@ app.use((req, res, next) => {
     res.locals.currentUser = req.user;
     next();
 });
+
+app.use(secure);
 
 // ROUTES
 app.use('/', indexRoutes);

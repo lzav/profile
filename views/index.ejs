@@ -1,83 +1,101 @@
 <%- include('./partials/header') %>
 
-    <section id="mainContent" class="container-fluid px-0 overflow-hidden">
+<section id="mainContent" class="container-fluid px-0 overflow-hidden">
+  <%- include('./partials/flashMessages') %>
 
-      <%- include('./partials/flashMessages') %>
+  <div class="row align-items-center m-0">
+    <div class="col-md-6 px-0">
+      <h2 class="text-center h1 d-none d-md-block">Let's work together...</h2>
+    </div>
+    <div class="col-md-6 px-0 d-none d-md-block">
+      <img
+        src="/images/annie-spratt-608001-unsplash.jpg"
+        class="img-fluid"
+        alt=""
+      />
+    </div>
+  </div>
 
-      <div class="row align-items-center m-0">
-        <div class="col-md-6 px-0">
-          <h1 class="text-center">Let's work together...</h1>
-        </div>
-        <div class="col-md-6 px-0 d-none d-md-block">
-          <img
-            src="/images/annie-spratt-608001-unsplash.jpg"
-            class="img-fluid"
-            alt=""
-          />
+  <div class="row align-items-center">
+    <div class="col-md-6 px-0 order-2 order-md-1 d-none d-md-block">
+      <img
+        src="/images/fatos-bytyqi-535528-unsplash.jpg"
+        class="img-fluid"
+        alt=""
+      />
+    </div>
+
+    <div class="col-md-6 px-0 order-1 order-md-2">
+      <h2 class="text-center h1 d-none d-md-block">as together, we are better.</h2>
+    </div>
+  </div>
+
+  <div class="row align-items-center m-0">
+    <div class="col-md-6 px-0">
+      <div class="row justify-content-center m-0">
+        <div class="col-8 col-sm-10">
+          <h1>Building this Site</h1>
+          <p>
+            This site was built using Node.js and MongoDB on the backend, with
+            Boostrap 5 on the frontend. (The full code can be viewed in this
+            GitHub repository.)
+          </p>
+          <p>
+            The site demonstrates a simple CRUD app, a blog, which uses both
+            local authentication, with confirmation email, and OAuth
+            authentication, through google and facebook. It also demonstrates
+            custom JS authorisation on the back end, and custom validation on
+            both front and back.
+          </p>
+
+          <p>
+            Please play around with the app. I have neither put any restrictions
+            on blog posts nor comments once you sign up: this allows you to see
+            the CRUD functionality without having to wait for posts or comments
+            to be vetted.
+          </p>
+          <p>
+            Please feel free to contact me if you have any questions. I am
+            planning to put up articles soon on how I got to this stage in my
+            web-developer journey.
+          </p>
         </div>
       </div>
+    </div>
+    <div class="col-md-6 px-0">
+      <img
+        src="/images/hal-gatewood-613602-unsplash.jpg"
+        class="img-fluid"
+        alt=""
+      />
+    </div>
+  </div>
 
-      <div class="row align-items-center">
-        <div class="col-md-6 px-0 order-2 order-md-1">
-          <img
-            src="/images/fatos-bytyqi-535528-unsplash.jpg"
-            class="img-fluid"
-            alt=""
-          />
-        </div>
+  <div class="row align-items-center">
+    <div class="col-md-6 px-0 d-none d-md-block">
+      <img
+        src="/images/bobby-burch-319840-unsplash.jpg"
+        class="img-fluid"
+        alt=""
+      />
+    </div>
 
-        <div class="col-md-6 px-0 order-1 order-md-2">
-          <h1 class="text-center">as together, we are better.</h1>
+    <div class="col-md-6 px-0">
+      <div class="row justify-content-center m-0">
+        <div class="col-8 col-sm-10">
+          <h2 class="text-center h1">A Developer Journey</h2>
+          <p>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Atque
+            ducimus molestias beatae ad nostrum a eveniet alias magnam, sequi
+            incidunt pariatur, natus vero maxime. A iure id, natus ducimus
+            excepturi dolorem sit! Quos asperiores ea debitis, cumque aliquam
+            vel nulla consectetur velit possimus quae, hic totam, dolorem quo!
+            Itaque, eius.
+          </p>
         </div>
       </div>
-
-      <div class="row align-items-center m-0">
-        <div class="col-md-6 px-0">
-          <div class="row justify-content-center m-0">
-            <div class="col-8 col-sm-10">
-              <h1 class="text-center">What I offer...</h1>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam
-                dolores, aliquid totam facilis placeat praesentium esse culpa
-                commodi recusandae! Maxime ipsum nesciunt quisquam neque
-                voluptatum soluta architecto libero. Voluptatum quod tenetur
-                numquam autem suscipit illum modi eum. Tempora labore sed
-                molestiae, nostrum, nesciunt vel officiis est ducimus repellat,
-                hic sunt.
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 px-0">
-          <img
-            src="/images/hal-gatewood-613602-unsplash.jpg"
-            class="img-fluid"
-            alt=""
-          />
-        </div>
-      </div>
-
-      <div class="row align-items-center">
-        <div class="col-md-6 px-0 d-none d-md-block">
-          <img src="/images/bobby-burch-319840-unsplash.jpg" class="img-fluid" alt="" />
-        </div>
-
-        <div class="col-md-6 px-0">
-          <div class="row justify-content-center m-0">
-            <div class="col-8 col-sm-10">
-              <h1 class="text-center">My journey...</h1>
-              <p>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Atque
-                ducimus molestias beatae ad nostrum a eveniet alias magnam,
-                sequi incidunt pariatur, natus vero maxime. A iure id, natus
-                ducimus excepturi dolorem sit! Quos asperiores ea debitis,
-                cumque aliquam vel nulla consectetur velit possimus quae, hic
-                totam, dolorem quo! Itaque, eius.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    </div>
+  </div>
+</section>
 
 <%- include('./partials/footer') %>

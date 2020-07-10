@@ -14,6 +14,8 @@ const commentRoutes = require('./routes/comment-routes');
 const flash  = require('connect-flash');
 const transporter = require("./config/nodemailer-config");
 const secure = require('express-force-https');
+var path = require('path');
+const favicon = require('serve-favicon');
 
 
 mongoose.connect(process.env.MONGODB_URL, {
@@ -28,8 +30,11 @@ mongoose.connection
     .on('error', err => console.log(err));
 
 
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
+
 
 
 app.use(cookieSession({

@@ -6,11 +6,10 @@ $(document).ready(setTopMargin());
 
 $(window).resize(setTopMargin());
 
+// scroll to about without nav hiding title
+if (document.getElementById("about")) {
+  const aboutLink = document.querySelector("a[href='/#about']");
 
-
-const aboutLink = document.querySelector("a[href='/#about']");
-
-if (aboutLink) {
   aboutLink.addEventListener("click", (e) => {
     e.preventDefault();
 

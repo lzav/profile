@@ -52,10 +52,16 @@ app.use((req, res, next) => {
     res.locals.flashSuccess = req.flash('success');
     res.locals.flashError = req.flash('error');    
     res.locals.currentUser = req.user;
+    res.locals.pathname = req._parsedOriginalUrl.pathname;
     next();
 });
 
 app.use(secure);
+
+// app.use((req, res, next) => {
+//     console.log(req._parsedOriginalUrl.pathname);
+//     next();
+// });
 
 // ROUTES
 app.use('/', indexRoutes);

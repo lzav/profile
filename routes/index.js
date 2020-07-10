@@ -8,12 +8,12 @@ router.get("/", (req, res) => {
 });
 
 router.get("/contact", (req, res) => {
-  // res.send('Contact route');
+  // console.log(res.locals.pathname);
   res.render("contact");
 });
 
 router.post("/contact", (req, res) => {
-
+  
   const {name, contactEmail, message } = req.body;
 
   // Server validation for contact

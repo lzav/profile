@@ -10,15 +10,15 @@ $(window).resize(setTopMargin());
 
 const aboutLink = document.querySelector("a[href='/#about']");
 
-aboutLink.addEventListener("click", scrollToAbout);
+if (aboutLink) {
+  aboutLink.addEventListener("click", (e) => {
+    e.preventDefault();
 
-function scrollToAbout(e) {
-  e.preventDefault();
+    const aboutTarget = document.getElementById("about");
+    const navHeight = $("#mainNav").outerHeight();
 
-  const aboutTarget = document.getElementById("about");
-  const navHeight = $("#mainNav").outerHeight();
+    const { x, y } = aboutTarget.getBoundingClientRect();
 
-  const { x, y } = aboutTarget.getBoundingClientRect();
-
-  window.scrollTo(x, y - navHeight);
+    window.scrollTo(x, y - navHeight);
+  });
 }

@@ -36,7 +36,8 @@ body {
     padding-top: 1.5em;
 }
 
-.bg-unsplash {
+.bgImg3 {
     background-image: url(/images/hal-gatewood-613602-unsplash.jpg);
     background-size: cover;
 }
+

@@ -35,3 +35,8 @@ body {
 .jumbotron {
     padding-top: 1.5em;
 }
+
+.bg-unsplash {
+    background-image: url(/images/hal-gatewood-613602-unsplash.jpg);
+    background-size: cover;
+}

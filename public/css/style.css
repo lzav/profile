@@ -41,3 +41,7 @@ body {
     background-size: cover;
 }
 
+.bgImg4 {
+  background-image: url(/images/bobby-burch-319840-unsplash.jpg);
+  background-size: cover;
+}

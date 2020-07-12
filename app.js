@@ -36,7 +36,6 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 
 
-
 app.use(cookieSession({
     name: 'lzdev',
     secret: process.env.EXPRESSSESSION_SECRET,
@@ -57,7 +56,8 @@ app.use((req, res, next) => {
     res.locals.flashSuccess = req.flash('success');
     res.locals.flashError = req.flash('error');    
     res.locals.currentUser = req.user;
-    res.locals.pathname = req._parsedOriginalUrl.pathname;
+    res.locals.pathname = req._parsedUrl.pathname;
+    // console.log(res.locals.pathname);
     next();
 });
 

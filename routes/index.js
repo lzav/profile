@@ -23,8 +23,8 @@ router.post("/contact", (req, res) => {
   }
 
   const mailOptions = {
-    from: "lzdev20@***REMOVED***.com",
-    to: "lzdev20@***REMOVED***.com",
+    from: process.env.MAILOPTIONS_FROM,
+    to: process.env.MAILOPTIONS_TO,
     subject: "Message from Website",
     text: `Message from ${name}, ${contactEmail}:
     

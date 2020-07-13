@@ -100,14 +100,14 @@ router.post("/register", (req, res) => {
 
             // Send confirmation email with unique code in
             const mailOptions = {
-              from: "lzdev20@***REMOVED***.com",
+              from: process.env.MAILOPTIONS_FROM,
               to: savedUser.email,
-              subject: "lzDev confirmation email",
+              subject: "lzDev Confirmation Email",
               text: `Hi ${savedUser.email}
             
             Please click the link below to confirm your registration:
 
-            http://localhost:3000/auth/confirm/${savedUser._id}/${savedUser.rString}
+            ${process.env.CONFIRMATION_ROUTE}/${savedUser._id}/${savedUser.rString}
 
             Kind regards,
 

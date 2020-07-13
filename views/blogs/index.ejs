@@ -9,7 +9,10 @@
 
         <a href="/blogs/new" class="btn btn-primary">Create a new blog</a>
 
-        <hr />
+        <% if (blogs.length !== 0) { %>
+            <hr />
+        <% } %> 
+        
 
         <% for (let blog of blogs) { %>
             <h4><a href="/blogs/<%= blog._id %>"><%= blog.title %></a> by <%= blog.author.displayName %></h4>

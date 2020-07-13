@@ -36,7 +36,12 @@ body {
     padding-top: 1.5em;
 }
 
-.bg-unsplash {
+.bgImg3 {
     background-image: url(/images/hal-gatewood-613602-unsplash.jpg);
     background-size: cover;
+}
+
+.bgImg4 {
+  background-image: url(/images/bobby-burch-319840-unsplash.jpg);
+  background-size: cover;
 }

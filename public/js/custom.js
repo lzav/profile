@@ -14,10 +14,12 @@ if (document.getElementById("about")) {
     e.preventDefault();
 
     const aboutTarget = document.getElementById("about");
-    const navHeight = $("#mainNav").outerHeight();
+    const navHeight = document.getElementById("mainNav").clientHeight;
 
-    const { x, y } = aboutTarget.getBoundingClientRect();
+    let { x, y } = aboutTarget.getBoundingClientRect();
+    x += window.scrollX;
+    y += window.scrollY;
 
-    window.scrollTo(x, y - navHeight);
+    window.scroll(x, y - navHeight);
   });
 }

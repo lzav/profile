@@ -96,7 +96,7 @@ router.post("/register", (req, res) => {
             confirmed: false,
             rString: randomString.generate(15),
           }).then((savedUser) => {
-            console.log("User saved: " + savedUser);
+            // console.log("User saved: " + savedUser);
 
             // Send confirmation email with unique code in
             const mailOptions = {
@@ -109,6 +109,7 @@ router.post("/register", (req, res) => {
 
             ${process.env.CONFIRMATION_ROUTE}/${savedUser._id}/${savedUser.rString}
 
+            
             Kind regards,
 
             Lorenzo
@@ -118,7 +119,7 @@ router.post("/register", (req, res) => {
             transporter
               .sendMail(mailOptions)
               .then((info) => {
-                console.log("Email sent: " + info.response);
+                // console.log("Email sent: " + info.response);
               })
               .catch((err) => console.log(err));
 

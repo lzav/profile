@@ -30,7 +30,7 @@ function scrollToAbout(e) {
   window.scroll(x, y - navHeight);
 }
 
-// if about link clicked from other pages
+// if about link clicked from pages other than home
 window.onload = () => {
   if (location.hash && location.hash === '#about') {
     location.hash = "";

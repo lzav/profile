@@ -78,8 +78,17 @@ router.get("/register", (req, res) => {
 });
 
 router.post("/register", (req, res) => {
+  
+  const { email, displayName, password } = req.body;
+
+  // validation
+  if (!email || !displayName || !password) {
+    req.flash("error", "Oops. Something went wrong. Please try again later.");
+    return res.redirect("/auth/login");
+  }
+
   // check user not already registered
-  User.findOne({ email: req.body.email })
+  User.findOne({ email: email })
     .then((result) => {
       if (result) {
         console.log("User already exists");
@@ -89,8 +98,8 @@ router.post("/register", (req, res) => {
         // register user then redirect
         bcrypt.hash(req.body.password, 10).then((hash) => {
           User.create({
-            displayName: req.body.displayName,
-            email: req.body.email,
+            displayName: displayName,
+            email: email,
             password: hash,
             // set to false until confirmed reg through email
             confirmed: false,

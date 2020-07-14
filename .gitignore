@@ -7,4 +7,5 @@ keys.js
 *.zip
 /backup
 test.html
+test.js
 practice.js

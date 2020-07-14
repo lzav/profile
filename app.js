@@ -14,7 +14,7 @@ const commentRoutes = require('./routes/comment-routes');
 const flash  = require('connect-flash');
 const transporter = require("./config/nodemailer-config");
 const secure = require('express-force-https');
-var path = require('path');
+const path = require('path');
 const favicon = require('serve-favicon');
 
 

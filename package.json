@@ -26,7 +26,12 @@
     "express": "^4.17.1",
     "express-force-https": "^1.0.0",
     "method-override": "^3.0.0",
+<<<<<<< HEAD
     "mongoose": "^5.10.2",
+=======
+    "mongoose": "^5.10.1",
+    "node-gyp": "^7.1.0",
+>>>>>>> 806e4ebafb74ac891164579fa3b4fb169fa59619
     "nodemailer": "^6.4.11",
     "passport": "^0.4.1",
     "passport-facebook": "^3.0.0",

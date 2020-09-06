@@ -55,13 +55,18 @@ if (newBlog) {
 function checkInputs(textInput) {
   removeMessages(textInput);
 
-  if (textInput.id != "contactEmail" && isBlank(textInput)) {
+  if (textInput.id != "contactEmail" && textInput.id !="login" && isBlank(textInput)) {
     warningMessage(textInput, "Please fill in this field.");
     // containsErrors will be return value or false
     return true;
   }
 
   if (textInput.id == "contactEmail" && !validateEmail(textInput.value)) {
+    warningMessage(textInput, "Please check your email address.");
+    return true;
+  }
+
+  if (textInput.id == "login" && !validateEmail(textInput.value)) {
     warningMessage(textInput, "Please check your email address.");
     return true;
   }

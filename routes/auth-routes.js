@@ -128,7 +128,8 @@ router.post("/register", (req, res) => {
             transporter
               .sendMail(mailOptions)
               .then((info) => {
-                // console.log("Email sent: " + info.response);
+                console.log("Email sent: " + info.response);
+                console.log(info);
               })
               .catch((err) => console.log(err));
 
